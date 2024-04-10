@@ -1,3 +1,5 @@
+using Google.Apis.Translate.v2.Data;
+
 namespace TranslateProject
 {
     public partial class Form1 : Form
@@ -17,6 +19,10 @@ namespace TranslateProject
             {
                 Dictionary<string, string> languageCodesAndNames = LanguageCodesHelper.GetAllLanguageCodesAndNames();
 
+                // Agregar opción "Auto" al ComboBox y seleccionarla
+                comboBoxLanguagesInput.Items.Add("Auto");
+                comboBoxLanguagesInput.SelectedIndex = 0;
+
                 foreach (var kvp in languageCodesAndNames)
                 {
                     comboBoxLanguagesInput.Items.Add(kvp.Value);
@@ -24,6 +30,7 @@ namespace TranslateProject
 
                     languageNamesToCodes.Add(kvp.Value, kvp.Key);
                 }
+                comboBoxLanguagesOutput.SelectedIndex = 0;
             }
             catch (Exception ex)
             {
@@ -35,22 +42,27 @@ namespace TranslateProject
         {
             try
             {
-                if (comboBoxLanguagesInput.SelectedItem != null && comboBoxLanguagesOutput.SelectedItem != null)
+                if (comboBoxLanguagesOutput.SelectedItem != null)
                 {
-                    string sourceLanguageName = comboBoxLanguagesInput.SelectedItem.ToString()!;
                     string targetLanguageName = comboBoxLanguagesOutput.SelectedItem.ToString()!;
-
-                    // Obtener los códigos de los idiomas seleccionados usando el diccionario auxiliar
-                    string sourceLanguageCode = languageNamesToCodes[sourceLanguageName];
                     string targetLanguageCode = languageNamesToCodes[targetLanguageName];
 
                     string textToTranslate = textBoxInput.Text;
+
+                    // Detectar automáticamente el idioma de entrada del texto
+                    string sourceLanguageCode = "auto";
+                    if (comboBoxLanguagesInput.SelectedItem != null && comboBoxLanguagesInput.SelectedItem.ToString() != "Auto")
+                    {
+                        string sourceLanguageName = comboBoxLanguagesInput.SelectedItem.ToString()!;
+                        sourceLanguageCode = languageNamesToCodes[sourceLanguageName];
+                    }
+
                     string translatedText = await googleTranslateService.TranslateText(textToTranslate, sourceLanguageCode, targetLanguageCode);
                     textBoxOutput.Text = translatedText;
                 }
                 else
                 {
-                    MessageBox.Show("Seleccione un idioma de entrada y un idioma de salida.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Seleccione un idioma de salida.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
