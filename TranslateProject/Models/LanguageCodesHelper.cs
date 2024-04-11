@@ -1,7 +1,7 @@
 ﻿using Google.Cloud.Translation.V2;
 using System.Reflection;
 
-namespace TranslateProject
+namespace TranslateProject.Models
 {
     public static class LanguageCodesHelper
     {

@@ -1,4 +1,4 @@
-﻿namespace TranslateProject
+﻿namespace TranslateProject.GoogleService
 {
     public class GoogleTranslateService
     {
