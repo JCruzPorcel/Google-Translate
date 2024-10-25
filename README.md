@@ -1,7 +1,11 @@
-# #104 Proyecto Completo
+# **Complete Project #104**
 
-## Se ha completado el objetivo principal y los objetivos secundarios adicionales:
+## 🎯 Completed Objectives
+- **Main Objective:** ✔️ Completed
+- **Additional Secondary Objectives:** ✔️ Completed
 
-+ Se agregó la opción de detectar automáticamente el idioma de origen del texto.
-+ No utiliza credenciales; hace una solicitud HTTP utilizando HttpClient, el cual devuelve un JSON que se lee y utiliza para la traducción. También se podría agregar la credencial a las variables de sistema si se requiere.
-+ Traducción simultánea: permite la traducción de un texto en 5 idiomas diferentes a elección.
+---
+
+- The option to automatically detect the source language of the text has been added.
+- No credentials are used; it makes an HTTP request using HttpClient, which returns a JSON that is read and used for translation. Credentials can also be added to system variables if required.
+- Simultaneous translation: allows translation of text into 5 different languages of choice.
